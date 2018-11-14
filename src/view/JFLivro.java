@@ -19,7 +19,7 @@ import utils.BdLivro;
  */
 public class JFLivro extends javax.swing.JFrame {  
    
-    private JFPrincipal telaPrincipal;
+    private /*@ nullable @*/ JFPrincipal telaPrincipal;
     
     /**
      * Creates new form Cliente
@@ -383,14 +383,17 @@ public class JFLivro extends javax.swing.JFrame {
             if (verificaDados()) {
                 try {
                     Livro l = new Livro();
+                    System.out.println("passou aqui1");
 
                     l.setExemplar(jT1Exemplar.getText());
                     l.setAutor(jT2Autor.getText());
                     l.setEdicao(Byte.valueOf(jT3Edicao.getText()));
                     l.setAno(Short.valueOf(jT4Ano.getText()));
                     l.setDisponibilidade(jT5Status.getText());                  
+                    System.out.println("passou aqui2");
 
                     BdLivro d = new BdLivro();
+                    System.out.println("passou aqui3");
 
                     d.adicionaLivro(l);
 
@@ -427,8 +430,8 @@ public class JFLivro extends javax.swing.JFrame {
     // MÉTODOS:
     
     // Edita os campos e colunas da tabela de resultados
-    DefaultTableModel tmLivro = new DefaultTableModel(null, new String[]{"Id", "Exemplar", "Autor", "Edição", "Ano", "Disponibilidade"});
-    List<Livro> livros;
+    /*@ nullable @*/ DefaultTableModel tmLivro = new DefaultTableModel(null, new String[]{"Id", "Exemplar", "Autor", "Edição", "Ano", "Disponibilidade"});
+    /*@ nullable @*/ List<Livro> livros;
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatos() throws SQLException {
@@ -630,31 +633,31 @@ public class JFLivro extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBAlterar;
-    private javax.swing.JButton jBCadastrar;
-    private javax.swing.JButton jBExcluir;
-    private javax.swing.JButton jBNovo;
-    private javax.swing.JButton jBPesquisar;
-    private javax.swing.JButton jBSair;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jT0Id;
-    private javax.swing.JTextField jT1Exemplar;
-    private javax.swing.JTextField jT2Autor;
-    private javax.swing.JTextField jT3Edicao;
-    private javax.swing.JTextField jT4Ano;
-    private javax.swing.JTextField jT5Status;
-    private javax.swing.JTextField jTPesquisar;
-    private javax.swing.JTable jTablePesquisa;
+    private /*@ nullable @*/ javax.swing.JButton jBAlterar;
+    private /*@ nullable @*/ javax.swing.JButton jBCadastrar;
+    private /*@ nullable @*/ javax.swing.JButton jBExcluir;
+    private /*@ nullable @*/ javax.swing.JButton jBNovo;
+    private /*@ nullable @*/ javax.swing.JButton jBPesquisar;
+    private /*@ nullable @*/ javax.swing.JButton jBSair;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel1;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel2;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel3;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel4;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel5;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel7;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel8;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel1;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel2;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel3;
+    private /*@ nullable @*/ javax.swing.JScrollPane jScrollPane1;
+    private /*@ nullable @*/ javax.swing.JTextField jT0Id;
+    private /*@ nullable @*/ javax.swing.JTextField jT1Exemplar;
+    private /*@ nullable @*/ javax.swing.JTextField jT2Autor;
+    private /*@ nullable @*/ javax.swing.JTextField jT3Edicao;
+    private /*@ nullable @*/ javax.swing.JTextField jT4Ano;
+    private /*@ nullable @*/ javax.swing.JTextField jT5Status;
+    private /*@ nullable @*/ javax.swing.JTextField jTPesquisar;
+    private /*@ nullable @*/ javax.swing.JTable jTablePesquisa;
     // End of variables declaration//GEN-END:variables
 
 }

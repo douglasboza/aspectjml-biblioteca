@@ -10,16 +10,17 @@ package model;
  * @author paulojp
  */
 public class Livro {
-    
-    private int id;
-    private String exemplar;
-    private String autor;
-    private byte edicao;
-    private short ano;
-    private String disponibilidade;
+
+    private int id;    
+    private /*@ nullable @*/ String exemplar;
+    private /*@ nullable @*/ String autor;
+    private /*@ nullable @*/ byte edicao;
+    private /*@ spec_public nullable @*/ short ano;
+    private /*@ nullable @*/ String disponibilidade;
+        
 
     public Livro(int id, String exemplar, String autor, byte edicao, short ano, String disponibilidade) {
-        this.id = id;
+       	this.id = id;
         this.exemplar = exemplar;
         this.autor = autor;
         this.edicao = edicao;
@@ -65,7 +66,11 @@ public class Livro {
     public short getAno() {
         return ano;
     }
-
+    
+	/*@
+	@ 	requires ano > 0;
+	@	ensures this.ano == ano; 
+	@*/
     public void setAno(short ano) {
         this.ano = ano;
     }

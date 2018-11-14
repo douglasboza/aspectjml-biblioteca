@@ -20,7 +20,7 @@ import model.Livro;
 public class BdLivro {
     
     /* ----CONEXÃO COM O BD-> */
-    private Connection conexao;
+    private /*@ nullable @*/ Connection conexao;
     
     // Estabelece uma conexão
     public BdLivro() throws SQLException {       

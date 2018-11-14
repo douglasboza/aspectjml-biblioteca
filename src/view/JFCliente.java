@@ -676,37 +676,37 @@ public class JFCliente extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBAlterar;
-    private javax.swing.JButton jBCadastrar;
-    private javax.swing.JButton jBExcluir;
-    private javax.swing.JButton jBNovo;
-    private javax.swing.JButton jBPesquisar;
-    private javax.swing.JButton jBSair;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jT0Id;
-    private javax.swing.JTextField jT1Nome;
-    private javax.swing.JTextField jT2DataAno;
-    private javax.swing.JTextField jT2DataDia;
-    private javax.swing.JTextField jT2DataMes;
-    private javax.swing.JTextField jT3Sexo;
-    private javax.swing.JTextField jT4Cpf;
-    private javax.swing.JTextField jT5Endereco;
-    private javax.swing.JTextField jT6Fone;
-    private javax.swing.JTextField jTPesquisar;
-    private javax.swing.JTable jTablePesquisa;
+    private /*@ nullable @*/ javax.swing.JButton jBAlterar;
+    private /*@ nullable @*/ javax.swing.JButton jBCadastrar;
+    private /*@ nullable @*/ javax.swing.JButton jBExcluir;
+    private /*@ nullable @*/ javax.swing.JButton jBNovo;
+    private /*@ nullable @*/ javax.swing.JButton jBPesquisar;
+    private /*@ nullable @*/ javax.swing.JButton jBSair;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel1;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel10;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel2;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel3;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel4;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel5;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel6;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel7;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel8;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel9;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel1;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel2;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel3;
+    private /*@ nullable @*/ javax.swing.JScrollPane jScrollPane1;
+    private /*@ nullable @*/ javax.swing.JTextField jT0Id;
+    private /*@ nullable @*/ javax.swing.JTextField jT1Nome;
+    private /*@ nullable @*/ javax.swing.JTextField jT2DataAno;
+    private /*@ nullable @*/ javax.swing.JTextField jT2DataDia;
+    private /*@ nullable @*/ javax.swing.JTextField jT2DataMes;
+    private /*@ nullable @*/ javax.swing.JTextField jT3Sexo;
+    private /*@ nullable @*/ javax.swing.JTextField jT4Cpf;
+    private /*@ nullable @*/ javax.swing.JTextField jT5Endereco;
+    private /*@ nullable @*/ javax.swing.JTextField jT6Fone;
+    private /*@ nullable @*/ javax.swing.JTextField jTPesquisar;
+    private /*@ nullable @*/ javax.swing.JTable jTablePesquisa;
     // End of variables declaration//GEN-END:variables
 
 }

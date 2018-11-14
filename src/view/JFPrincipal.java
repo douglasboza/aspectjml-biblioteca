@@ -42,7 +42,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Biblioteca");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/imagens/antique-library-302930.jpg"))); // NOI18N
+//        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/imagens/antique-library-302930.jpg"))); // NOI18N
 
         jMenu2.setText("Cliente");
 
@@ -208,16 +208,16 @@ public class JFPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenuItem jMCliente;
-    private javax.swing.JMenuItem jMEmprestimo;
-    private javax.swing.JMenuItem jMLivro;
-    private javax.swing.JMenuItem jMMulta;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenuBar jMenuBar1;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel2;
+    private /*@ nullable @*/ javax.swing.JMenuItem jMCliente;
+    private /*@ nullable @*/ javax.swing.JMenuItem jMEmprestimo;
+    private /*@ nullable @*/ javax.swing.JMenuItem jMLivro;
+    private /*@ nullable @*/ javax.swing.JMenuItem jMMulta;
+    private /*@ nullable @*/ javax.swing.JMenu jMenu2;
+    private /*@ nullable @*/ javax.swing.JMenu jMenu3;
+    private /*@ nullable @*/ javax.swing.JMenu jMenu4;
+    private /*@ nullable @*/ javax.swing.JMenu jMenu6;
+    private /*@ nullable @*/ javax.swing.JMenu jMenu7;
+    private /*@ nullable @*/ javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
