@@ -383,15 +383,12 @@ public class JFLivro extends javax.swing.JFrame {
             if (verificaDados()) {
                 try {
                     Livro l = new Livro();
-                    System.out.println("passou aqui1");
-
                     l.setExemplar(jT1Exemplar.getText());
                     l.setAutor(jT2Autor.getText());
                     l.setEdicao(Byte.valueOf(jT3Edicao.getText()));
                     l.setAno(Short.valueOf(jT4Ano.getText()));
                     l.setDisponibilidade(jT5Status.getText());                  
-                    System.out.println("passou aqui2");
-
+                    
                     BdLivro d = new BdLivro();
                     System.out.println("passou aqui3");
 

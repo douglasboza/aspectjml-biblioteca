@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author paulojp
- */
+import org.multijava.mjc.CGFCollectionMap.SetMap;
+
 public class Multa {
     private int id_multa;
     private int id_cliente;
@@ -16,10 +9,15 @@ public class Multa {
     private float valor;
 
     public Multa(int id_multa, int id_emprestimo, String descricao, float valor, String pagamento) {
-        this.id_multa = id_multa;
-        this.id_cliente = id_emprestimo;
-        this.descricao = descricao;
-        this.valor = valor;
+    	setId_multa(id_multa);
+    	setId_cliente(id_emprestimo);
+    	setDescricao(descricao);
+    	setValor(valor);
+    	
+        //this.id_multa = id_multa;
+        //this.id_cliente = id_emprestimo;
+        //this.descricao = descricao;
+        //this.valor = valor;
     }
 
     public Multa() {
@@ -28,7 +26,11 @@ public class Multa {
     public int getId_multa() {
         return id_multa;
     }
-
+    
+	/*@ public constraint 
+	  @ 	this.id_multa == \old(this.id_multa) || 0 == \old(this.id_multa);
+	  @	requires id_multa > 0;
+	  @*/
     public void setId_multa(int id_multa) {
         this.id_multa = id_multa;
     }
@@ -52,7 +54,9 @@ public class Multa {
     public float getValor() {
         return valor;
     }
-
+    
+	/*@ requires valor >= 0;
+	  @*/
     public void setValor(float valor) {
         this.valor = valor;
     }
