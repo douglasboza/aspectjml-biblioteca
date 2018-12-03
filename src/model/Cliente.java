@@ -11,6 +11,7 @@ package model;
  */
 public class Cliente {
     
+<<<<<<< HEAD
     private /*@ nullable @*/ int id;
     private /*@ nullable @*/ String nome;
     private /*@ nullable @*/ String dataNasc;
@@ -19,6 +20,18 @@ public class Cliente {
     private /*@ nullable @*/ String endereco;
     private /*@ nullable @*/ String fone;
 
+=======
+    private int id;
+    private String nome;
+    private String dataNasc;
+    private String sexo;
+    private String cpf;
+    private String endereco;
+    private String fone;
+    
+    
+    
+>>>>>>> af953984d6884404df441e317dc119f5c7119cd3
     public Cliente(String nome, String dataNasc, String sexo, String cpf, String endereco, String fone) {
         this.nome = nome;
         this.dataNasc = dataNasc;
@@ -30,59 +43,84 @@ public class Cliente {
     
      public Cliente() {
     }  
-
+    /*@public invariant 0 < id;*/
+     
+    /*@ id == old(id)@*/
     public int getId() {
         return id;
     }
-
+    /*
+     *@	requires 0 < id;
+     *@	ensures this.id == id;
+      @*/
     public void setId(int id) {
         this.id = id;
     }    
-    
+    /*@ ensures nome == old(nome);
+     *@*/
     public String getNome() {
         return nome;
     }
-
+    /*
+     *@	requires nome != null;
+     *@	ensures this.nome == nome;
+      @*/
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    /*@	ensures dataNasc == old(dataNasc);@*/
     public String getDataNasc() {
         return dataNasc;
     }
-
+    /*
+     *@	requires dataNasc != null;
+     *@	ensures this.dataNasc == dataNasc;
+      @*/
     public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
-
+    /*@ensures sexo == old(sexo);*/
     public String getSexo() {
         return sexo;
     }
-
+    /*
+     *@	requires sexo == 'M' || sexo == 'F';
+     *@	ensures this.sexo == sexo;
+      @*/
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-
+    /*@ensures cpf == old(cpf);*/
     public String getCpf() {
         return cpf;
     }
-
+    /*
+     *@	requires cpf != null;
+     *@	ensures this.cpf == cpf;
+      @*/
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
+    /*@	ensures endereco == old(endereco);@*/
     public String getEndereco() {
         return endereco;
     }
-
+    /*
+     *@	requires endereco != null;
+     *@	ensures this.endereco == endereco;
+     *@
+     */
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-
+    /*@	ensures fone == old(fone);@*/
     public String getFone() {
         return fone;
     }
-
+    /*
+     *@	requires fone != null
+     *@	ensures this.fone == fone
+      @*/
     public void setFone(String fone) {
         this.fone = fone;
     }  
