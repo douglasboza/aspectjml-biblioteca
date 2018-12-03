@@ -488,9 +488,9 @@ public class JFMulta extends javax.swing.JFrame {
     
     /* ----CLIENTE-> */ 
     // Configura campos da tabela de pesquisas de acordo com os campos do Cliente
-    DefaultTableModel tmCliente = new DefaultTableModel(null, new String[]{"Id", "Nome", "CPF"});    
+    /*@ nullable @*/ DefaultTableModel tmCliente = new DefaultTableModel(null, new String[]{"Id", "Nome", "CPF"});    
     // Lista de clientes, recebe os registros retornados da pesquisa
-    List<Cliente> clientes;  
+    /*@ nullable @*/ List<Cliente> clientes;  
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatosCliente() throws SQLException {        
@@ -533,9 +533,9 @@ public class JFMulta extends javax.swing.JFrame {
     
     /*----MULTA->*/    
     // Configura campos da tabela de pesquisas de acordo com os campos das Multas
-    DefaultTableModel tmMulta = new DefaultTableModel(null, new String[]{"ID Multa", "Nome Cliente", "Descrição", "Valor"});
+    /*@ nullable @*/ DefaultTableModel tmMulta = new DefaultTableModel(null, new String[]{"ID Multa", "Nome Cliente", "Descrição", "Valor"});
     // Lista de multas, recebe os registros retornados da pesquisa
-    List<Multa> multas;
+    /*@ nullable @*/ List<Multa> multas;
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatosMulta() throws SQLException {         
@@ -760,35 +760,35 @@ public class JFMulta extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup bGDescricao;
-    private javax.swing.JButton jBExcluir;
-    private javax.swing.JButton jBNovo;
-    private javax.swing.JButton jBPagar;
-    private javax.swing.JButton jBPesquisar;
-    private javax.swing.JButton jBRegistrar;
-    private javax.swing.JButton jBSair;
-    private javax.swing.JComboBox jCBDescricao;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jT1IdCliente;
-    private javax.swing.JTextField jT3Valor;
-    private javax.swing.JTextField jT4ValorTotal;
-    private javax.swing.JTextField jTPesquisar;
-    private javax.swing.JTable jTableCliente;
-    private javax.swing.JTable jTableMulta;
+    private /*@ nullable @*/ javax.swing.ButtonGroup bGDescricao;
+    private /*@ nullable @*/ javax.swing.JButton jBExcluir;
+    private /*@ nullable @*/ javax.swing.JButton jBNovo;
+    private /*@ nullable @*/ javax.swing.JButton jBPagar;
+    private /*@ nullable @*/ javax.swing.JButton jBPesquisar;
+    private /*@ nullable @*/ javax.swing.JButton jBRegistrar;
+    private /*@ nullable @*/ javax.swing.JButton jBSair;
+    private /*@ nullable @*/ javax.swing.JComboBox jCBDescricao;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel10;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel2;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel3;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel4;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel5;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel6;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel7;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel8;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel9;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel1;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel2;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel3;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel4;
+    private /*@ nullable @*/ javax.swing.JScrollPane jScrollPane1;
+    private /*@ nullable @*/ javax.swing.JScrollPane jScrollPane3;
+    private /*@ nullable @*/ javax.swing.JTextField jT1IdCliente;
+    private /*@ nullable @*/ javax.swing.JTextField jT3Valor;
+    private /*@ nullable @*/ javax.swing.JTextField jT4ValorTotal;
+    private /*@ nullable @*/ javax.swing.JTextField jTPesquisar;
+    private /*@ nullable @*/ javax.swing.JTable jTableCliente;
+    private /*@ nullable @*/ javax.swing.JTable jTableMulta;
     // End of variables declaration//GEN-END:variables
 
 }

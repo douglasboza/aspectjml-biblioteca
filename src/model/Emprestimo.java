@@ -11,11 +11,11 @@ package model;
  */
 public class Emprestimo {
     
-    private int id_emprestimo;
-    private int id_cliente;
-    private int id_livro;
-    private String data_emprestimo;
-    private String data_devolucao;
+    private /*@ nullable @*/ int id_emprestimo;
+    private /*@ nullable @*/ int id_cliente;
+    private /*@ nullable @*/ int id_livro;
+    private /*@ nullable @*/ String data_emprestimo;
+    private /*@ nullable @*/ String data_devolucao;
 
     public Emprestimo() {
     }   

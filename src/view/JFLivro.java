@@ -399,6 +399,7 @@ public class JFLivro extends javax.swing.JFrame {
                     desabilitaCampos();
 
                 } catch (SQLException ex) {
+                	System.out.println(ex);
                     JOptionPane.showMessageDialog(rootPane, "Erro ao cadastrar dados.");
                 }
             }

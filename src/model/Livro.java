@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
-/**
- *
- * @author paulojp
- */
+
 public class Livro {
 
     private /*@ spec_public @*/ int id;    
@@ -18,7 +11,7 @@ public class Livro {
     private /*@ spec_public nullable @*/ short ano;
     private /*@ spec_public nullable @*/ String disponibilidade;
         
-    
+
     public Livro(int id, String exemplar, String autor, byte edicao, short ano, String disponibilidade) {
        	setId(id);
        	setAutor(autor);
@@ -26,13 +19,8 @@ public class Livro {
        	setEdicao(edicao);
        	setAutor(autor);
        	setDisponibilidade(disponibilidade);
-//   	  this.id = id;
-//        this.exemplar = exemplar;
-//        this.autor = autor;
-//        this.edicao = edicao;
-//        this.ano = ano;
-//        this.disponibilidade = disponibilidade;
     }
+    
 
     public Livro() {
     }   
@@ -49,58 +37,97 @@ public class Livro {
         this.id = id;
     }
 
+    
+
+	/*@	requires exemplar != null && !exemplar.equals("");
+	  @ ensures this.exemplar == exemplar; 
+	  @ assignable this.exemplar;
+	  @ also
+	  @ 	requires exemplar.equals("");
+	  @ 	assignable \nothing;
+	  @ 	ensures this.exemplar == \old(this.exemplar);
+	@*/
+    public void setExemplar(String exemplar) {
+    	if(!exemplar.equals("")){
+    		this.exemplar = exemplar;
+    	}
+    }
+    
+	// @ assignable \nothing
     public String getExemplar() {
         return exemplar;
     }
-    
-	/*@ ensures exemplar == this.exemplar; 
-	@*/
-    public void setExemplar(String exemplar) {
-        this.exemplar = exemplar;
-    }
-
+   
+    // @ assignable \nothing
     public String getAutor() {
         return autor;
     }
     
-	/*@ ensures autor == this.autor; 
+	/*@	requires autor != null && !autor.equals("");
+	  @ ensures this.autor == autor; 
+	  @ assignable this.autor;
+	  @ also
+	  @ 	requires autor.equals("");
+	  @ 	assignable \nothing;
+	  @ 	ensures this.autor == \old(this.autor);
 	@*/
     public void setAutor(String autor) {
-        this.autor = autor;
+    	if(!autor.equals("")){
+    		this.autor = autor;
+    	}
     }
-
+    
+    // @ assignable \nothing
     public byte getEdicao() {
         return edicao;
     }
     
-    
-	/*@ requires edicao >= 0;
-	  @	ensures id == this.id; 
+    /*@	requires edicao >= 0;
+	  @ ensures this.edicao == edicao; 
+	  @ assignable this.edicao;
 	@*/
     public void setEdicao(byte edicao) {
-        this.edicao = edicao;
+    	this.edicao = edicao;
     }
-
+    
+    // @ assignable \nothing
     public short getAno() {
         return ano;
     }
-	//	
 
 	/*@ requires ano > 0;
 	  @	ensures this.ano == ano; 
+	  @ assignable this.ano;
+	  @ also
+	  @ 	requires ano < 0;
+  	  @ 	assignable \nothing;
+	  @ 	ensures this.ano == \old(this.ano);
 	@*/
     public void setAno(short ano) {
-        this.ano = ano;
+    	if(ano > 0){   	
+    		this.ano = ano;
+    	}
     }
-
+    
+    // @ assignable \nothing
     public String getDisponibilidade() {
         return disponibilidade;
     }
     
-	/*@ ensures disponibilidade == this.disponibilidade; 
+    /*@	requires disponibilidade != null && !disponibilidade.equals("");
+	  @ ensures this.disponibilidade == disponibilidade; 
+	  @ assignable this.autor;
+	  @ also
+	  @ 	requires disponibilidade.equals("");
+	  @ 	assignable \nothing;
+	  @ 	ensures this.disponibilidade == \old(this.disponibilidade);
 	@*/
     public void setDisponibilidade(String disponibilidade) {
-        this.disponibilidade = disponibilidade;
+    	if(!disponibilidade.equals("")){
+    		this.disponibilidade = disponibilidade;
+    	}
     }    
 }
+
+
 

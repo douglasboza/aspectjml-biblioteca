@@ -32,8 +32,8 @@ import model.Livro;
  */
 public class JFEmprestimo extends javax.swing.JFrame {  
    
-    JFMulta enviaValor;
-    private JFPrincipal telaPrincipal;
+	/*@ nullable @*/ JFMulta enviaValor;
+    private /*@ nullable @*/JFPrincipal telaPrincipal;
     boolean verifica = false;
     
     /**
@@ -442,6 +442,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
         try {  
             cadastraRegistro();
         } catch (SQLException ex) {
+        	System.out.println(ex);
             JOptionPane.showMessageDialog(rootPane, "Erro ao efetuar empréstimo.");
         }
     }//GEN-LAST:event_jBCadastrarActionPerformed
@@ -457,6 +458,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
             try {
                 listaContatosCliente();
             } catch (SQLException ex) {
+            	System.out.println(ex);
                 JOptionPane.showMessageDialog(rootPane, "Erro ao efetuar empréstimo.");
             }            
         } else if (jRLivros.isSelected()) {
@@ -480,6 +482,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
         try {
             excluirRegistro();
         } catch (SQLException ex) {
+        	System.out.println(ex);
             JOptionPane.showMessageDialog(rootPane, "Erro ao excluir registro.");
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
@@ -502,6 +505,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
         try {
             listaContatosEmprestimo();
         } catch (SQLException ex) {
+        	System.out.println(ex);
             JOptionPane.showMessageDialog(rootPane, "Erro ao listar emprestimos.");
         }
     }//GEN-LAST:event_jTableClienteMouseClicked
@@ -511,6 +515,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
         try {
             devolveLivro();
         } catch (SQLException ex) {
+        	System.out.println(ex);
             JOptionPane.showMessageDialog(rootPane, "Erro ao devolver livro.");
         } catch (ParseException ex) {
             Logger.getLogger(JFEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
@@ -565,6 +570,7 @@ public class JFEmprestimo extends javax.swing.JFrame {
                             listaContatosLivro();
 
                         } catch (SQLException ex) {
+                        	System.out.println(ex);
                             JOptionPane.showMessageDialog(rootPane, "Erro ao efetuar empréstimo.");
                         }
                     } else {
@@ -697,9 +703,9 @@ public class JFEmprestimo extends javax.swing.JFrame {
     
     /* ----CLIENTE-> */ 
     // Configura campos da tabela de pesquisas de acordo com os campos do Cliente
-    DefaultTableModel tmCliente = new DefaultTableModel(null, new String[]{"Id", "Nome", "CPF"});    
+    /*@ nullable @*/ DefaultTableModel tmCliente = new DefaultTableModel(null, new String[]{"Id", "Nome", "CPF"});    
     // Lista de clientes, recebe os registros retornados da pesquisa
-    List<Cliente> clientes;  
+    /*@ nullable @*/ List<Cliente> clientes;  
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatosCliente() throws SQLException {        
@@ -742,9 +748,9 @@ public class JFEmprestimo extends javax.swing.JFrame {
     
     /*----EMPRÉSTIMO->*/    
     // Configura campos da tabela de pesquisas de acordo com os campos dos Empréstimos
-    DefaultTableModel tmEmprestimo = new DefaultTableModel(null, new String[]{"ID", "ID Cliente", "ID Livro", "Data Emprestimo", "Data Devolução"});
+    /*@ nullable @*/ DefaultTableModel tmEmprestimo = new DefaultTableModel(null, new String[]{"ID", "ID Cliente", "ID Livro", "Data Emprestimo", "Data Devolução"});
     // Lista de empréstimos, recebe os registros retornados da pesquisa
-    List<Emprestimo> emprestimos;
+    /*@ nullable @*/ List<Emprestimo> emprestimos;
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatosEmprestimo() throws SQLException { 
@@ -788,8 +794,8 @@ public class JFEmprestimo extends javax.swing.JFrame {
    
     /* ----LIVRO-> */    
     // Edita os campos e colunas da tabela de resultados
-    DefaultTableModel tmLivro = new DefaultTableModel(null, new String[]{"Id", "Exemplar", "Autor", "Disponibilidade"});
-    List<Livro> livros;
+    /*@ nullable @*/ DefaultTableModel tmLivro = new DefaultTableModel(null, new String[]{"Id", "Exemplar", "Autor", "Disponibilidade"});
+    /*@ nullable @*/ List<Livro> livros;
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatosLivro() throws SQLException {
@@ -1030,42 +1036,42 @@ public class JFEmprestimo extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup bGPesquisa;
-    private javax.swing.JButton jBCadastrar;
-    private javax.swing.JButton jBDevolver;
-    private javax.swing.JButton jBExcluir;
-    private javax.swing.JButton jBNovo;
-    private javax.swing.JButton jBPesquisar;
-    private javax.swing.JButton jBSair;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JRadioButton jRClientes;
-    private javax.swing.JRadioButton jRLivros;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jT0IdEmprestimo;
-    private javax.swing.JTextField jT1IdCliente;
-    private javax.swing.JTextField jT2IdLivro;
-    private javax.swing.JTextField jT3DataEmprestimo;
-    private javax.swing.JTextField jT4DataDevolucao;
-    private javax.swing.JTextField jTPesquisar;
-    private javax.swing.JTable jTableCliente;
-    private javax.swing.JTable jTableEmprestimo;
-    private javax.swing.JTable jTableLivro;
+    private /*@ nullable @*/ javax.swing.ButtonGroup bGPesquisa;
+    private /*@ nullable @*/ javax.swing.JButton jBCadastrar;
+    private /*@ nullable @*/ javax.swing.JButton jBDevolver;
+    private /*@ nullable @*/ javax.swing.JButton jBExcluir;
+    private /*@ nullable @*/ javax.swing.JButton jBNovo;
+    private /*@ nullable @*/ javax.swing.JButton jBPesquisar;
+    private /*@ nullable @*/ javax.swing.JButton jBSair;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel1;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel10;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel11;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel2;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel3;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel4;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel5;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel6;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel7;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel8;
+    private /*@ nullable @*/ javax.swing.JLabel jLabel9;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel1;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel2;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel3;
+    private /*@ nullable @*/ javax.swing.JPanel jPanel4;
+    private /*@ nullable @*/ javax.swing.JRadioButton jRClientes;
+    private /*@ nullable @*/ javax.swing.JRadioButton jRLivros;
+    private /*@ nullable @*/ javax.swing.JScrollPane jScrollPane1;
+    private /*@ nullable @*/ javax.swing.JScrollPane jScrollPane2;
+    private /*@ nullable @*/ javax.swing.JScrollPane jScrollPane3;
+    private /*@ nullable @*/ javax.swing.JTextField jT0IdEmprestimo;
+    private /*@ nullable @*/ javax.swing.JTextField jT1IdCliente;
+    private /*@ nullable @*/ javax.swing.JTextField jT2IdLivro;
+    private /*@ nullable @*/ javax.swing.JTextField jT3DataEmprestimo;
+    private /*@ nullable @*/ javax.swing.JTextField jT4DataDevolucao;
+    private /*@ nullable @*/ javax.swing.JTextField jTPesquisar;
+    private /*@ nullable @*/ javax.swing.JTable jTableCliente;
+    private /*@ nullable @*/ javax.swing.JTable jTableEmprestimo;
+    private /*@ nullable @*/ javax.swing.JTable jTableLivro;
     // End of variables declaration//GEN-END:variables
 
 }

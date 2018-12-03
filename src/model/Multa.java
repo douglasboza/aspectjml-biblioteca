@@ -3,21 +3,16 @@ package model;
 import org.multijava.mjc.CGFCollectionMap.SetMap;
 
 public class Multa {
-    private int id_multa;
-    private int id_cliente;
-    private String descricao;
-    private float valor;
+    private /*@ nullable @*/ int id_multa;
+    private /*@ nullable @*/ int id_cliente;
+    private /*@ nullable @*/ String descricao;
+    private /*@ nullable @*/ float valor;
 
     public Multa(int id_multa, int id_emprestimo, String descricao, float valor, String pagamento) {
     	setId_multa(id_multa);
     	setId_cliente(id_emprestimo);
     	setDescricao(descricao);
     	setValor(valor);
-    	
-        //this.id_multa = id_multa;
-        //this.id_cliente = id_emprestimo;
-        //this.descricao = descricao;
-        //this.valor = valor;
     }
 
     public Multa() {
@@ -27,10 +22,7 @@ public class Multa {
         return id_multa;
     }
     
-	/*@ public constraint 
-	  @ 	this.id_multa == \old(this.id_multa) || 0 == \old(this.id_multa);
-	  @	requires id_multa > 0;
-	  @*/
+
     public void setId_multa(int id_multa) {
         this.id_multa = id_multa;
     }
@@ -55,8 +47,7 @@ public class Multa {
         return valor;
     }
     
-	/*@ requires valor >= 0;
-	  @*/
+	
     public void setValor(float valor) {
         this.valor = valor;
     }

@@ -11,13 +11,13 @@ package model;
  */
 public class Cliente {
     
-    private int id;
-    private String nome;
-    private String dataNasc;
-    private String sexo;
-    private String cpf;
-    private String endereco;
-    private String fone;
+    private /*@ nullable @*/ int id;
+    private /*@ nullable @*/ String nome;
+    private /*@ nullable @*/ String dataNasc;
+    private /*@ nullable @*/ String sexo;
+    private /*@ nullable @*/ String cpf;
+    private /*@ nullable @*/ String endereco;
+    private /*@ nullable @*/ String fone;
 
     public Cliente(String nome, String dataNasc, String sexo, String cpf, String endereco, String fone) {
         this.nome = nome;

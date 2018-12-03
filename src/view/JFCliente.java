@@ -20,7 +20,7 @@ import utils.BdCliente;
 public class JFCliente extends javax.swing.JFrame {  
    
     // Variável que recebe a instância da tela principal
-    private JFPrincipal telaPrincipal;
+    private /*@ nullable @*/ JFPrincipal telaPrincipal;
     
     /**
      * Creates new form Cliente
@@ -475,8 +475,8 @@ public class JFCliente extends javax.swing.JFrame {
     // MÉTODOS:
     
     // Edita os campos e colunas da tabela de resultados
-    DefaultTableModel tmCliente = new DefaultTableModel(null, new String[]{"Id", "Nome", "Data Nasc.", "Sexo", "CPF", "Endereço", "Fone"});
-    List<Cliente> clientes;
+    /*@ nullable @*/ DefaultTableModel tmCliente = new DefaultTableModel(null, new String[]{"Id", "Nome", "Data Nasc.", "Sexo", "CPF", "Endereço", "Fone"});
+    /*@ nullable @*/ List<Cliente> clientes;
         
     
     // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa

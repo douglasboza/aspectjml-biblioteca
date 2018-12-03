@@ -35,11 +35,15 @@ public class BdLivro {
     
     // CREATE - Adiciona um registro
     public void adicionaLivro(Livro l) throws SQLException {
+    	System.out.println("passo1u");
+    	
         // Prepara conexão p/ receber o comando SQL
         String sql = "INSERT INTO livro(exemplar, autor, edicao, ano, disponibilidade)"
                 + "VALUES(?, ?, ?, ?, ?)";       
         PreparedStatement stmt;
+        System.out.println("passou32");
         // stmt recebe o comando SQL
+        
         stmt = this.conexao.prepareStatement(sql);
         
         // Seta os valores p/ o stmt, substituindo os "?"
@@ -49,9 +53,14 @@ public class BdLivro {
         stmt.setString(4, String.valueOf(l.getAno()));
         stmt.setString(5, l.getDisponibilidade());
         
+        System.out.println("passou");
+
+        
         // O stmt executa o comando SQL no BD, e fecha a conexão
         stmt.execute();
+        System.out.println("passouexecute");
         stmt.close();
+        System.out.println("passouclose");
         
     }
     
@@ -110,6 +119,9 @@ public class BdLivro {
         stmt.setInt(6, l.getId());
         
         // O stmt executa o comando SQL no BD, e fecha a conexão
+
+
+        
         stmt.execute();
         stmt.close();
     }
