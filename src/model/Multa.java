@@ -22,7 +22,10 @@ public class Multa {
         return id_multa;
     }
     
-
+	/*@ public constraint 
+	  @ 	this.id_multa == \old(this.id_multa) || 0 == \old(this.id_multa);
+	  @	requires id_multa > 0;
+	  @*/
     public void setId_multa(int id_multa) {
         this.id_multa = id_multa;
     }
@@ -47,9 +50,21 @@ public class Multa {
         return valor;
     }
     
-	
+	/*@	requires valor > 0;
+	  @ ensures this.valor == valor; 
+	  @ assignable this.valor;
+	  @ also
+	  @ 	requires valor <= 0;
+	  @ 	assignable \nothing;
+	  @ 	ensures this.valor == 0;
+	@*/
     public void setValor(float valor) {
-        this.valor = valor;
+    	if(valor <= 0) {
+    		this.valor = 0;
+    	}else {
+    		this.valor = valor;
+    	}
+        
     }
     
 }

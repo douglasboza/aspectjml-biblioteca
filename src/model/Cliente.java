@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
-/**
- *
- * @author paulojp
- */
+
 public class Cliente {
     
-<<<<<<< HEAD
+
     private /*@ nullable @*/ int id;
     private /*@ nullable @*/ String nome;
     private /*@ nullable @*/ String dataNasc;
@@ -20,18 +13,7 @@ public class Cliente {
     private /*@ nullable @*/ String endereco;
     private /*@ nullable @*/ String fone;
 
-=======
-    private int id;
-    private String nome;
-    private String dataNasc;
-    private String sexo;
-    private String cpf;
-    private String endereco;
-    private String fone;
-    
-    
-    
->>>>>>> af953984d6884404df441e317dc119f5c7119cd3
+
     public Cliente(String nome, String dataNasc, String sexo, String cpf, String endereco, String fone) {
         this.nome = nome;
         this.dataNasc = dataNasc;
@@ -43,21 +25,20 @@ public class Cliente {
     
      public Cliente() {
     }  
-    /*@public invariant 0 < id;*/
-     
-    /*@ id == old(id)@*/
+
     public int getId() {
         return id;
     }
-    /*
-     *@	requires 0 < id;
-     *@	ensures this.id == id;
-      @*/
+    
+ 	/*@ public constraint 
+	  @ 	this.id == \old(this.id) || 0 == \old(this.id);
+	  @		requires id > 0;
+	  @*/
     public void setId(int id) {
         this.id = id;
     }    
-    /*@ ensures nome == old(nome);
-     *@*/
+   
+    
     public String getNome() {
         return nome;
     }

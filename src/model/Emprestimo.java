@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
-/**
- *
- * @author paulojp
- */
 public class Emprestimo {
     
     private /*@ nullable @*/ int id_emprestimo;
@@ -31,10 +23,11 @@ public class Emprestimo {
     public int getId_emprestimo() {
         return id_emprestimo;
     }
-    /*
-     *@	requires 0 < id_emprestimo;
-     *@	ensures this.id_emprestimo == id_emprestimo;
-      @*/
+    
+ 	/*@ public constraint 
+	  @ 	this.id == \old(this.id) || 0 == \old(this.id);
+	  @		requires id > 0;
+	  @*/
     public void setId_emprestimo(int id_emprestimo) {
         this.id_emprestimo = id_emprestimo;
     }
