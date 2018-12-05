@@ -31,9 +31,6 @@ public class BdMulta {
     
     
     
-    /* ----MULTA-> */
-    
-    // CREATE - Adiciona um registro
     public void adicionaMulta(Multa m) throws SQLException {
         // Prepara conexão p/ receber o comando SQL
         String sql = "INSERT INTO multa(id_cliente, descricao, valor) VALUES(?, ?, ?)";       
@@ -87,7 +84,10 @@ public class BdMulta {
         return lista;          
     }
     
-    // SELECT - Retorna uma lista com as multas de um determinado cliente
+    /* @ requires id_cliente > 0 
+       @ ensures (\forall int i; 0 <= i && i < cont_list;
+    @ 					lista.get(i) !=  null);  		
+    @*/
     public List<Multa> getListaMultaPorCliente(String id_cliente) throws SQLException{  
         // Prepara conexão p/ receber o comando SQL
         String sql = "SELECT multa.id_multa, multa.id_cliente, multa.descricao, multa.valor " +
@@ -103,7 +103,7 @@ public class BdMulta {
         
         List<Multa> lista = new ArrayList<>();
         
-        // Enquanto existir registros, pega os valores do ReultSet e vai adicionando na lista
+        // Enquanto existir registros, pega os valores do ResultSet e vai adicionando na lista
         while(rs.next()) {
             //  A cada loop, é instanciado um novo objeto, p/ servir de ponte no envio de registros p/ a lista
             Multa m = new Multa();
@@ -170,7 +170,7 @@ public class BdMulta {
         stmt.close();        
     }
     
-    // DELETE - Apaga todas as multas
+
     public void removeMultas(String id) throws SQLException {       
         // Prepara conexão p/ receber o comando SQL
         String sql = "DELETE FROM multa WHERE id_cliente=?";
@@ -185,5 +185,5 @@ public class BdMulta {
         stmt.close();        
     }
     
-    /* <-MULTA---- */
+
 }

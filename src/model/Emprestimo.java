@@ -3,11 +3,11 @@ package model;
 
 public class Emprestimo {
     
-    private /*@ nullable @*/ int id_emprestimo;
-    private /*@ nullable @*/ int id_cliente;
-    private /*@ nullable @*/ int id_livro;
-    private /*@ nullable @*/ String data_emprestimo;
-    private /*@ nullable @*/ String data_devolucao;
+    private /*@ spec_public nullable @*/ int id_emprestimo;
+    private /*@ spec_public nullable @*/ int id_cliente;
+    private /*@ spec_public nullable @*/ int id_livro;
+    private /*@ spec_public nullable @*/ String data_emprestimo;
+    private /*@ spec_public nullable @*/ String data_devolucao;
 
     public Emprestimo() {
     }   
@@ -19,14 +19,18 @@ public class Emprestimo {
         this.data_emprestimo = data_emprestimo;
         this.data_devolucao = data_devolucao;
     }
-    /*@	ensures id_emprestimo == \old(id_emprestimo);@*/
+    
+ 	/*@ public constraint 
+	  @ 	this.id_emprestimo == \old(this.id_emprestimo) || 0 == \old(this.id_emprestimo);
+	  @		requires id_emprestimo > 0;
+	  @*/
     public int getId_emprestimo() {
         return id_emprestimo;
     }
     
  	/*@ public constraint 
-	  @ 	this.id == \old(this.id) || 0 == \old(this.id);
-	  @		requires id > 0;
+	  @ 	this.id_emprestimo == \old(this.id_emprestimo) || 0 == \old(this.id_emprestimo);
+	  @		requires id_emprestimo > 0;
 	  @*/
     public void setId_emprestimo(int id_emprestimo) {
         this.id_emprestimo = id_emprestimo;

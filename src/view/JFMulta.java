@@ -17,10 +17,8 @@ import model.Cliente;
 import model.Multa;
 
 
-/**
- *
- * @author paulojp
- */
+
+
 public class JFMulta extends javax.swing.JFrame {  
        
     /**

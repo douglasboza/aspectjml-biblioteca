@@ -3,7 +3,10 @@ package model;
 
 
 public class Livro {
-
+	//@ public invariant ano >= 0;
+	//@ public invariant edicao >= 0;
+	//@ public initially id == 0;
+	
     private /*@ spec_public @*/ int id;    
     private /*@ spec_public nullable @*/ String exemplar;
     private /*@ spec_public nullable @*/ String autor;
@@ -11,7 +14,8 @@ public class Livro {
     private /*@ spec_public nullable @*/ short ano;
     private /*@ spec_public nullable @*/ String disponibilidade;
         
-
+    
+   
     public Livro(int id, String exemplar, String autor, byte edicao, short ano, String disponibilidade) {
        	setId(id);
        	setAutor(autor);
@@ -36,8 +40,8 @@ public class Livro {
     public void setId(int id) {
         this.id = id;
     }
-
     
+
 
 	/*@	requires exemplar != null && !exemplar.equals("");
 	  @ ensures this.exemplar == exemplar; 
@@ -58,11 +62,7 @@ public class Livro {
         return exemplar;
     }
    
-    // @ assignable \nothing
-    public String getAutor() {
-        return autor;
-    }
-    
+
 	/*@	requires autor != null && !autor.equals("");
 	  @ ensures this.autor == autor; 
 	  @ assignable this.autor;
@@ -76,6 +76,11 @@ public class Livro {
     		this.autor = autor;
     	}
     }
+    
+    public String getAutor() {
+        return autor;
+    }
+    
     
     // @ assignable \nothing
     public byte getEdicao() {

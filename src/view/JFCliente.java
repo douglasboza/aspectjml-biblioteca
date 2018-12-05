@@ -595,11 +595,12 @@ public class JFCliente extends javax.swing.JFrame {
     
     
     
-    
-    /* ----OUTROS-> */
-    // MÉTODOS:
-    
-    // Limpa os campos do formulário
+ 
+    /*
+      @	requires true;
+      @	ensures jT0Id.getText().equals("") & jT1Nome.getText().equals("") & jT2DataAno.getText().equals("") &
+      jT3Sexo.getText().equals("");
+    */
     private void limpaCampos() {
         jT0Id.setText("");
         jT1Nome.setText("");
