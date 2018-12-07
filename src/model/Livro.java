@@ -15,7 +15,10 @@ public class Livro {
 	//@ public invariant ano >= 0;
 	//@ public invariant edicao >= 0;
 	//@ public initially id == 0;
-   
+    /*@ public constraint 
+	  @ 	this.id == \old(this.id) || 0 == \old(this.id);
+   	*/
+    
     public Livro(int id, String exemplar, String autor, byte edicao, short ano, String disponibilidade) {
        	setId(id);
        	setAutor(autor);
@@ -25,23 +28,28 @@ public class Livro {
        	setDisponibilidade(disponibilidade);
     }
     
-
     public Livro() {
     }   
     
+    // @ assignable \nothing
     public int getId() {
         return id;
     }
 
-	/*@ public constraint 
-	  @ 	this.id == \old(this.id) || 0 == \old(this.id);
-	  @	requires id > 0;
-	  @*/
+    /*@	requires id >= 0;
+	  @ ensures this.id == id; 
+	  @ assignable this.id;
+	  @ also
+	  @ 	requires id < 0;
+	  @ 	assignable \nothing;
+	  @ 	ensures this.id == \old(this.id);
+	@*/
     public void setId(int id) {
-        this.id = id;
+    	if(id >= 0) {
+            this.id = id;
+    	}
     }
     
-
 
 	/*@	requires exemplar != null && !exemplar.equals("");
 	  @ ensures this.exemplar == exemplar; 
@@ -62,7 +70,6 @@ public class Livro {
         return exemplar;
     }
    
-
 	/*@	requires autor != null && !autor.equals("");
 	  @ ensures this.autor == autor; 
 	  @ assignable this.autor;
@@ -77,11 +84,10 @@ public class Livro {
     	}
     }
     
-    
+    // @ assignable \nothing
     public String getAutor() {
         return this.autor;
     }
-    
     
     // @ assignable \nothing
     public byte getEdicao() {

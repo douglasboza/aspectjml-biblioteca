@@ -20,14 +20,21 @@ public class BdLivro {
     private /*@ spec_public nullable @*/ List<Livro> lista = new ArrayList<>();
 	
     /*@ public initially 
-	@		lista.size() == 0 
+	@		lista.size() == 0; 
 	@*/
+    
+	/*@ public constraint
+	@			(\forall int i; 0 <= i && i < lista.size();
+	@ 				lista.get(i) instanceof Livro );
+	@*/	
+    
+    
+    // @ invariant conexao instanceof Connection;
+    // @ invariant (\exists conexao);
     
     public BdLivro() throws SQLException {       
         this.conexao = CriaConexao.getConexao();
     }
-    
-    // @ invariant (\exists conexao);
     
 
     /*@	requires l.exemplar != null && !l.exemplar.equals("");
