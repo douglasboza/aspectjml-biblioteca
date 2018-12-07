@@ -18,11 +18,17 @@ public class BdLivro {
     
     private /*@ nullable @*/ Connection conexao;
     private /*@ spec_public nullable @*/ List<Livro> lista = new ArrayList<>();
-    private /*@ spec_public nullable @*/ int cont_list = 0;
+	
+    /*@ public initially 
+	@		lista.size() == 0 
+	@*/
     
     public BdLivro() throws SQLException {       
         this.conexao = CriaConexao.getConexao();
     }
+    
+    // @ invariant (\exists conexao);
+    
 
     /*@	requires l.exemplar != null && !l.exemplar.equals("");
 	@*/
@@ -45,23 +51,20 @@ public class BdLivro {
     }
     
 
-    /* @ ensures (\forall int i; 0 <= i && i < cont_list;
-    @ 					lista.get(i) !=  null);  		
+    /* @ ensures \exists lista && (\forall int i; 0 <= i && i < lista.size();
+    @ 					lista.get(i).getId() !=  null);  		
+    @ 	
     @*/
     public List<Livro> getLista(String exemplar) throws SQLException{
     	lista.clear();
-    	cont_list = 0;
     	
         String sql = "SELECT * FROM livro WHERE exemplar like ?";
         PreparedStatement stmt = this.conexao.prepareStatement(sql);
         stmt.setString(1, exemplar);
         
         ResultSet rs = stmt.executeQuery();
-        
-        
-        
+       
         while(rs.next()) {
-        	cont_list ++;
             Livro l = new Livro();
             l.setId(Integer.valueOf(rs.getString("id_livro")));
             l.setExemplar(rs.getString("exemplar"));

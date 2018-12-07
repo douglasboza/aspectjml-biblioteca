@@ -3,18 +3,18 @@ package model;
 
 
 public class Livro {
-	//@ public invariant ano >= 0;
-	//@ public invariant edicao >= 0;
-	//@ public initially id == 0;
+
 	
     private /*@ spec_public @*/ int id;    
     private /*@ spec_public nullable @*/ String exemplar;
     private /*@ spec_public nullable @*/ String autor;
-    private /*@ spec_public nullable @*/ byte edicao;
-    private /*@ spec_public nullable @*/ short ano;
+    private /*@ spec_public nullable @*/ byte edicao = 1;
+    private /*@ spec_public nullable @*/ short ano = 1;
     private /*@ spec_public nullable @*/ String disponibilidade;
         
-    
+	//@ public invariant ano >= 0;
+	//@ public invariant edicao >= 0;
+	//@ public initially id == 0;
    
     public Livro(int id, String exemplar, String autor, byte edicao, short ano, String disponibilidade) {
        	setId(id);
@@ -58,7 +58,7 @@ public class Livro {
     }
     
 	// @ assignable \nothing
-    public String getExemplar() {
+    public /*@ pure @*/ String getExemplar() {
         return exemplar;
     }
    
@@ -77,8 +77,9 @@ public class Livro {
     	}
     }
     
+    
     public String getAutor() {
-        return autor;
+        return this.autor;
     }
     
     
@@ -87,9 +88,9 @@ public class Livro {
         return edicao;
     }
     
-    /*@	requires edicao >= 0;
-	  @ ensures this.edicao == edicao; 
-	  @ assignable this.edicao;
+    /* @ requires edicao >= 0;
+	   @ ensures this.edicao == edicao; 
+	   @ assignable this.edicao;
 	@*/
     public void setEdicao(byte edicao) {
     	this.edicao = edicao;
@@ -104,7 +105,7 @@ public class Livro {
 	  @	ensures this.ano == ano; 
 	  @ assignable this.ano;
 	  @ also
-	  @ 	requires ano < 0;
+	  @ 	requires ano <= 0;
   	  @ 	assignable \nothing;
 	  @ 	ensures this.ano == \old(this.ano);
 	@*/

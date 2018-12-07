@@ -13,15 +13,22 @@ public class Biblioteca {
     public static void main(String[] args) throws SQLException, ParseException {
         JFPrincipal principal = new JFPrincipal();
         principal.setVisible(true);
-//        System.out.println("Conectando ao bdasdasdanco de dados.");
     	
+    	// Teste invariante edição
+	    /*
+	      Livro l = new Livro();
+	      l.setEdicao((byte) 2);
+	      l.setEdicao((byte) -12);
+	      System.out.println(l.getEdicao());
+		*/
     	
-//    	Livro l = new Livro();
-//    	Cliente c = new Cliente();
-//    	c.setNome("dsast");
-//    	l.teste(c);
-//    	
-//    	System.out.println(c.getNome());
+    	// Teste ano
+	    /*
+	      Livro l = new Livro();
+	      l.setAno((byte) 2);
+	      l.setEdicao((byte) -12);
+	      System.out.println(l.getEdicao());
+		*/
     	
 //        Livro l = new Livro();
 //        short a  = 34;

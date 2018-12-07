@@ -5,10 +5,7 @@
  */
 package view;
 
-/**
- *
- * @author paulojp
- */
+
 public class JFPrincipal extends javax.swing.JFrame {
 
     /**

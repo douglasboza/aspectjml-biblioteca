@@ -85,8 +85,8 @@ public class BdMulta {
     }
     
     /* @ requires id_cliente > 0 
-       @ ensures (\forall int i; 0 <= i && i < cont_list;
-    @ 					lista.get(i) !=  null);  		
+       @ ensures (\forall int i; 0 <= i && i < lista.size());
+    @ 					lista.get(i).getId() !=  null);  		
     @*/
     public List<Multa> getListaMultaPorCliente(String id_cliente) throws SQLException{  
         // Prepara conexão p/ receber o comando SQL

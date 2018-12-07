@@ -13,10 +13,7 @@ import model.Livro;
 import utils.BdLivro;
 
 
-/**
- *
- * @author paulojp
- */
+
 public class JFLivro extends javax.swing.JFrame {  
    
     private /*@ nullable @*/ JFPrincipal telaPrincipal;
@@ -369,17 +366,16 @@ public class JFLivro extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBSairActionPerformed
     
-    
-    
-    
-    /* ----CADASTRO-> */
-    // MÉTODOS:
-    
-    // Método p/ cadastrar um registro no banco de dados.
+   
+	/*@	requires jT0Id.getText().equals("");
+	  @ ensures jT1Exemplar.getText().equals("") & jT2Autor.getText().equals("")
+	  			& jT3Edicao.getText().equals("") & jT4Ano.getText().equals("")
+	   			& jT5Status.getText().equals("");
+	  @ also
+	  @ 	assignable \nothing;
+	@*/    
     private void cadastraRegistro() {
-        // Antes de cadastrar, verifica se o usuário está com algum registro selecionado
         if (jT1Exemplar.isEditable() && jT0Id.getText().equals("")) {
-            // Antes de cadastrar, verifica se os campos foram preenchidos
             if (verificaDados()) {
                 try {
                     Livro l = new Livro();
@@ -390,7 +386,6 @@ public class JFLivro extends javax.swing.JFrame {
                     l.setDisponibilidade(jT5Status.getText());                  
                     
                     BdLivro d = new BdLivro();
-                    System.out.println("passou aqui3");
 
                     d.adicionaLivro(l);
 
@@ -408,30 +403,30 @@ public class JFLivro extends javax.swing.JFrame {
         }
     }
     
-    // Método p/ validação do formulário
-    private boolean verificaDados() {
+    /*@ requires (!jT1Exemplar.getText().equals("")) && (!jT2Autor.getText().equals("")) 
+                && (!jT3Edicao.getText().equals("")) && (!jT4Ano.getText().equals(""))
+                && (!jT5Status.getText().equals(""));
+    @ assignable \nothing;
+    @ ensures \result == true;
+    @ signals (Exception) (jT1Exemplar.getText().equals("")) || (jT2Autor.getText().equals("")) 
+                || (jT3Edicao.getText().equals("")) || (jT4Ano.getText().equals(""))
+                || (jT5Status.getText().equals(""));
+    @*/
+    public boolean verificaDados() {
         if ((!jT1Exemplar.getText().equals("")) && (!jT2Autor.getText().equals("")) 
                 && (!jT3Edicao.getText().equals("")) && (!jT4Ano.getText().equals(""))
                 && (!jT5Status.getText().equals(""))) {
+        	System.out.println("true");
             return true;
         }
         JOptionPane.showMessageDialog(rootPane, "Dados imcompletos.");
+        System.out.println("false");
         return false;
     }
+  
     
-    /* <-CADASTRO---- */ 
-    
-    
-    
-    
-    /* ----PESQUISA-> */
-    // MÉTODOS:
-    
-    // Edita os campos e colunas da tabela de resultados
     /*@ nullable @*/ DefaultTableModel tmLivro = new DefaultTableModel(null, new String[]{"Id", "Exemplar", "Autor", "Edição", "Ano", "Disponibilidade"});
     /*@ nullable @*/ List<Livro> livros;
-    
-    // Lista a quantidade de resultado, de acordo com o nome passado no campo pesquisa
     private void listaContatos() throws SQLException {
         limpaCampos();
         BdLivro d = new BdLivro();
@@ -442,7 +437,6 @@ public class JFLivro extends javax.swing.JFrame {
         livros.clear();
     }
     
-    // Mostra a lista de resultado de acordo com o nome passado no campo pesquisa
     private void mostraPesquisa(List<Livro> livros) {
         // Limpa a tabela sempre que for solicitado uma nova pesquisa
         limparTabela();
@@ -465,31 +459,17 @@ public class JFLivro extends javax.swing.JFrame {
         }
     }
     
-    // Limpa a tabela de resultados
+
     private void limparTabela() {       
         while (tmLivro.getRowCount() > 0) {            
             tmLivro.removeRow(0);
         }
     }
-    /* Outra opção de limpar tabelas
-    private void limparTabela() {        
-        while (tmLivro.getRowCount() > 0) {                
-            tmLivro.getDataVector().removeAllElements();
-        }
-    }
-    */  
-    /* <-PESQUISA---- */      
-    
-    
-    
-    /* ----EXCLUIR-> */
-    // MÉTODOS:
-    
-    // Exclui resgistro
+
     private void excluirRegistro() throws SQLException {
         // Se algum registro estiver selecionado
         if (jTablePesquisa.getSelectedRow() != -1) {
-            // Exibe uma janela de confirmação antes de exluir o registro
+            // Exibe uma janela de confirmação antes de excluir o registro
             int resp = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir este registro?",
                     "Confirmação!", JOptionPane.YES_NO_OPTION);
 
@@ -511,24 +491,26 @@ public class JFLivro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Registro não selecionado.");
         }
     }
-    /* <-EXCLUIR---- */
     
+    boolean teste_altera_registro = false;
+    Livro teste_livro = new Livro();
     
-    
-    
-    /* ----ALTERAR-> */
-    // MÉTODOS:
-    
-    // Altera registro
+	/*@	requires teste_altera_registro == true;
+	  @ ensures teste_livro.getExemplar() == jT1Exemplar.getText();
+	  @ also
+	  @		requires teste_altera_registro == false;
+	@*/ 
     private void alteraRegistro() throws SQLException {
         if (jTablePesquisa.getSelectedRow() != -1) {
             int resp = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente alterar este registro?",
                     "Confirmação!", JOptionPane.YES_NO_OPTION);
 
             // Se a confirmação for SIM
-            if (resp == JOptionPane.YES_NO_OPTION) {                
+            if (resp == JOptionPane.YES_NO_OPTION) {   
+            	teste_altera_registro = true;
                 Livro l = new Livro();
                 BdLivro d = new BdLivro();
+                teste_livro = l;
                 
                 l.setId(Integer.valueOf(jT0Id.getText()));
                 l.setExemplar(jT1Exemplar.getText());
@@ -545,18 +527,16 @@ public class JFLivro extends javax.swing.JFrame {
                 listaContatos();
             }
         } else {
+        	teste_altera_registro = false;
             JOptionPane.showMessageDialog(rootPane, "Registro não selecionado.");
         }
     }
-    /* <-ALTERAR---- */
-    
-    
-    
-    
-    /* ----OUTROS-> */
-    // MÉTODOS:
-    
-    // Limpa os campos do formulário
+
+	/*@	requires true;
+	  @ ensures jT0Id.getText().equals("") & jT1Exemplar.getText().equals("")
+	  			& jT2Autor.getText().equals("") & jT3Edicao.getText().equals("")
+	   			& jT4Ano.getText().equals("");
+	@*/ 
     private void limpaCampos() {
         jT0Id.setText("");
         jT1Exemplar.setText("");
@@ -566,7 +546,6 @@ public class JFLivro extends javax.swing.JFrame {
         jT5Status.setText("");
     }
     
-    // Desabilita os campos do formulário
     private void desabilitaCampos() {
         jT0Id.setEditable(false);
         jT1Exemplar.setEditable(false);
@@ -576,9 +555,7 @@ public class JFLivro extends javax.swing.JFrame {
         jT5Status.setEditable(false);
     }
     
-    // Habilita os campos do formulário
     private void habilitaCampos() {
-        
         jT1Exemplar.setEditable(true);
         jT2Autor.setEditable(true);
         jT3Edicao.setEditable(true);
@@ -586,14 +563,7 @@ public class JFLivro extends javax.swing.JFrame {
         jT5Status.setEditable(true);
     }
     
-    /* <-OUTROS---- */
-    
-    
-    
-    
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -631,31 +601,31 @@ public class JFLivro extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private /*@ nullable @*/ javax.swing.JButton jBAlterar;
-    private /*@ nullable @*/ javax.swing.JButton jBCadastrar;
-    private /*@ nullable @*/ javax.swing.JButton jBExcluir;
-    private /*@ nullable @*/ javax.swing.JButton jBNovo;
-    private /*@ nullable @*/ javax.swing.JButton jBPesquisar;
-    private /*@ nullable @*/ javax.swing.JButton jBSair;
-    private /*@ nullable @*/ javax.swing.JLabel jLabel1;
-    private /*@ nullable @*/ javax.swing.JLabel jLabel2;
-    private /*@ nullable @*/ javax.swing.JLabel jLabel3;
-    private /*@ nullable @*/ javax.swing.JLabel jLabel4;
-    private /*@ nullable @*/ javax.swing.JLabel jLabel5;
-    private /*@ nullable @*/ javax.swing.JLabel jLabel7;
-    private /*@ nullable @*/ javax.swing.JLabel jLabel8;
-    private /*@ nullable @*/ javax.swing.JPanel jPanel1;
-    private /*@ nullable @*/ javax.swing.JPanel jPanel2;
-    private /*@ nullable @*/ javax.swing.JPanel jPanel3;
-    private /*@ nullable @*/ javax.swing.JScrollPane jScrollPane1;
-    private /*@ nullable @*/ javax.swing.JTextField jT0Id;
-    private /*@ nullable @*/ javax.swing.JTextField jT1Exemplar;
-    private /*@ nullable @*/ javax.swing.JTextField jT2Autor;
-    private /*@ nullable @*/ javax.swing.JTextField jT3Edicao;
-    private /*@ nullable @*/ javax.swing.JTextField jT4Ano;
-    private /*@ nullable @*/ javax.swing.JTextField jT5Status;
-    private /*@ nullable @*/ javax.swing.JTextField jTPesquisar;
-    private /*@ nullable @*/ javax.swing.JTable jTablePesquisa;
+    private /*@ spec_public nullable @*/ javax.swing.JButton jBAlterar;
+    private /*@ spec_public nullable @*/ javax.swing.JButton jBCadastrar;
+    private /*@ spec_public nullable @*/ javax.swing.JButton jBExcluir;
+    private /*@ spec_public nullable @*/ javax.swing.JButton jBNovo;
+    private /*@ spec_public nullable @*/ javax.swing.JButton jBPesquisar;
+    private /*@ spec_public nullable @*/ javax.swing.JButton jBSair;
+    private /*@ spec_public nullable @*/ javax.swing.JLabel jLabel1;
+    private /*@ spec_public nullable @*/ javax.swing.JLabel jLabel2;
+    private /*@ spec_public nullable @*/ javax.swing.JLabel jLabel3;
+    private /*@ spec_public nullable @*/ javax.swing.JLabel jLabel4;
+    private /*@ spec_public nullable @*/ javax.swing.JLabel jLabel5;
+    private /*@ spec_public nullable @*/ javax.swing.JLabel jLabel7;
+    private /*@ spec_public nullable @*/ javax.swing.JLabel jLabel8;
+    private /*@ spec_public nullable @*/ javax.swing.JPanel jPanel1;
+    private /*@ spec_public nullable @*/ javax.swing.JPanel jPanel2;
+    private /*@ spec_public nullable @*/ javax.swing.JPanel jPanel3;
+    private /*@ spec_public nullable @*/ javax.swing.JScrollPane jScrollPane1;
+    private /*@ spec_public nullable @*/ javax.swing.JTextField jT0Id;
+    private /*@ spec_public nullable @*/ javax.swing.JTextField jT1Exemplar;
+    private /*@ spec_public nullable @*/ javax.swing.JTextField jT2Autor;
+    private /*@ spec_public nullable @*/ javax.swing.JTextField jT3Edicao;
+    private /*@ spec_public nullable @*/ javax.swing.JTextField jT4Ano;
+    private /*@ spec_public nullable @*/ javax.swing.JTextField jT5Status;
+    private /*@ spec_public nullable @*/ javax.swing.JTextField jTPesquisar;
+    private /*@ spec_public nullable @*/ javax.swing.JTable jTablePesquisa;
     // End of variables declaration//GEN-END:variables
 
 }
