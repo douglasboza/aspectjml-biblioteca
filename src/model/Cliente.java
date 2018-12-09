@@ -13,44 +13,60 @@ public class Cliente {
     private /*@ spec_public nullable @*/ String endereco;
     private /*@ spec_public nullable @*/ String fone;
 
-
+	//@ public initially id == 0;
+    /*@ public constraint 
+	  @ 	this.id == \old(this.id) || 0 == \old(this.id);
+   	*/
+    
     public Cliente(String nome, String dataNasc, String sexo, String cpf, String endereco, String fone) {
-        this.nome = nome;
-        this.dataNasc = dataNasc;
-        this.sexo = sexo;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.fone = fone;
+        setFone(fone);
+        setEndereco(endereco);
+        setCpf(cpf);
+        setSexo(sexo);
+        setDataNasc(dataNasc);
+        setNome(nome);
     }
     
-     public Cliente() {
+    public Cliente() {
     }  
-
+    
+    // @ assignable \nothing
     public int getId() {
         return id;
     }
     
- 	/*@ public constraint 
-	  @ 	this.id == \old(this.id) || 0 == \old(this.id);
-	  @		requires id > 0;
-	  @*/
+    /*@	requires id >= 0;
+	  @ ensures this.id == id; 
+	  @ assignable this.id;
+	  @ also
+	  @ 	requires id < 0;
+	  @ 	assignable \nothing;
+	  @ 	ensures this.id == \old(this.id);
+	@*/
     public void setId(int id) {
         this.id = id;
     }    
-   
+    
+    // @ assignable \nothing
     public String getNome() {
         return nome;
     }
     
-    /*
-     @	requires nome != null;
-     @	ensures this.nome == nome;
-     @ */
+	/*@	requires nome != null && !nome.equals("");
+	  @ ensures this.nome == nome; 
+	  @ assignable this.nome;
+	  @ also
+	  @ 	requires nome.equals("");
+	  @ 	assignable \nothing;
+	  @ 	ensures this.nome == \old(this.nome);
+	@*/
     public void setNome(String nome) {
-        this.nome = nome;
+    	if(!nome.equals("")) {
+    		this.nome = nome;
+    	}
     }
     
-
+    // @ assignable \nothing
     public String getDataNasc() {
         return dataNasc;
     }
@@ -63,6 +79,7 @@ public class Cliente {
         this.dataNasc = dataNasc;
     }
     
+    // @ assignable \nothing 
     public String getSexo() {
         return sexo;
     }
@@ -74,7 +91,8 @@ public class Cliente {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-
+    
+    // @ assignable \nothing
     public String getCpf() {
         return cpf;
     }
@@ -105,6 +123,7 @@ public class Cliente {
     public String getFone() {
         return fone;
     }
+    
     /*
      @	requires fone != null
      @	ensures this.fone == fone
