@@ -13,47 +13,36 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Emprestimo;
 
-/**
- *
- * @author paulojp
- */
 public class BdEmprestimo {
     
-    /* ----CONEXÃO COM O BD-> */
     private Connection conexao;
     
-    // Estabelece uma conexão
     public BdEmprestimo() throws SQLException {       
         this.conexao = CriaConexao.getConexao();
     }
-    /* <-CONEXÃO COM O BD---- */
+    // @ invariant conexao instanceof Connection;
+    // @ invariant (\exists conexao);
     
-    
-    
-    
-    /* ----EMPRESTIMO-> */
-    
-    // CREATE - Adiciona um registro
+    /*@	requires e instanceof Emprestimo;
+	@*/
     public void adicionaEmprestimo(Emprestimo e) throws SQLException {
-        // Prepara conexão p/ receber o comando SQL
         String sql = "INSERT INTO emprestimo(id_cliente, id_livro, data_emprestimo, data_devolucao) VALUES(?, ?, ?, ?)";       
         PreparedStatement stmt;
-        // stmt recebe o comando SQL
         stmt = this.conexao.prepareStatement(sql);
         
-        // Seta os valores p/ o stmt, substituindo os "?"        
         stmt.setString(1, String.valueOf(e.getId_cliente()));
         stmt.setString(2, String.valueOf(e.getId_livro()));
         stmt.setString(3, e.getData_emprestimo());
         stmt.setString(4, e.getData_devolucao());
         
-        // O stmt executa o comando SQL no BD, e fecha a conexão
         stmt.execute();
         stmt.close();
         
     }
     
-    // SELECT - Retorna uma lista com o resultado da consulta
+    /* @ ensures (\forall int i; 0 <= i && i < \return.size();
+    @ 					\return.get(i).getId_emprestimo() != null);  		
+    @*/
     public List<Emprestimo> getLista(String id) throws SQLException{
         // Prepara conexão p/ receber o comando SQL
         String sql = "SELECT * FROM emprestimo WHERE id_emprestimo like ?";
@@ -89,7 +78,11 @@ public class BdEmprestimo {
         return lista;          
     }
     
-    // SELECT - Retorna uma lista com as multas de um clientes epecífico
+    /* 
+       @ requires !id_cliente.equals("") & id_cliente.equals != null;
+       @ ensures (\forall int i; 0 <= i && i < \return.size();
+       @ 					\return.get(i).getId_emprestimo() != null);  		
+    */
     public List<Emprestimo> getListaPorCliente(String id_cliente) throws SQLException{
         // Prepara conexão p/ receber o comando SQL
         String sql = "SELECT emprestimo.id_emprestimo, emprestimo.id_cliente, emprestimo.id_livro, emprestimo.data_emprestimo, emprestimo.data_devolucao" +
@@ -129,10 +122,9 @@ public class BdEmprestimo {
         return lista;          
     }
     
-    // SELECT - Verifica se o cliente tem alguma multa
+    /*@	requires !id_cliente.equals("") & id_cliente != null;
+ 	@*/
     public boolean verificaMultaCliente(String id_cliente) throws SQLException{
-
-// Prepara conexão p/ receber o comando SQL
         String sql = "SELECT COUNT(multa.id_cliente) AS quantMulta" +
                         " FROM multa" +
                         " WHERE id_cliente = ?;";
@@ -158,7 +150,8 @@ public class BdEmprestimo {
         return false;          
     }
     
-    // DELETE - Apaga registros
+    /*@	requires id >= 0;
+ 	@*/
     public void remove(int id) throws SQLException {       
         // Prepara conexão p/ receber o comando SQL
         String sql = "DELETE FROM emprestimo WHERE id_emprestimo=?";
@@ -173,5 +166,5 @@ public class BdEmprestimo {
         stmt.close();
         
     }
-    /* <-EMPRESTIMO---- */
+
 }

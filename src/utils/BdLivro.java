@@ -37,7 +37,7 @@ public class BdLivro {
     }
     
 
-    /*@	requires l.exemplar != null && !l.exemplar.equals("");
+    /*@	requires l.exemplar != null && !l.exemplar.equals("") & l instanceof Livro;
 	@*/
     public void adicionaLivro(Livro l) throws SQLException {    	
         String sql = "INSERT INTO livro(exemplar, autor, edicao, ano, disponibilidade)"
@@ -89,7 +89,7 @@ public class BdLivro {
         return lista;          
     }
     
-    /* @ requires l.id > 0 
+    /* @ requires l.id > 0 & l instanceof Livro; 
     @*/
     public void altera(Livro l) throws SQLException {
         String sql = "UPDATE livro set exemplar=?, autor=?, edicao=?, ano=?, disponibilidade=?"
@@ -107,7 +107,8 @@ public class BdLivro {
         stmt.close();
     }
     
-    
+    /* @ l instanceof Livro; 
+    @*/
     public void alteraDisponibilidadeLivro(Livro l) throws SQLException {
         String sql = "UPDATE livro set disponibilidade=?"
                 + "WHERE id_livro=?";
@@ -120,7 +121,7 @@ public class BdLivro {
         stmt.close();
     }
     
-    /* @ requires l.id > 0 
+    /* @ requires l.id >= 0 
     @*/
     public void remove(int id) throws SQLException {       
         String sql = "DELETE FROM livro WHERE id_livro=?";

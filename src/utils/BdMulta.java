@@ -13,24 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Multa;
 
-/**
- *
- * @author paulojp
- */
 public class BdMulta {
     
-    /* ----CONEXÃO COM O BD-> */
     private Connection conexao;
     
-    // Estabelece uma conexão
     public BdMulta() throws SQLException {       
         this.conexao = CriaConexao.getConexao();
     }
-    /* <-CONEXÃO COM O BD---- */
     
     
-    
-    
+    // @ invariant (\exists conexao);
+    // @ invariant conexao instanceof Connection;
+
+    /*@	requires m instanceof Multa;
+	@*/
     public void adicionaMulta(Multa m) throws SQLException {
         // Prepara conexão p/ receber o comando SQL
         String sql = "INSERT INTO multa(id_cliente, descricao, valor) VALUES(?, ?, ?)";       
@@ -43,13 +39,15 @@ public class BdMulta {
         stmt.setString(2, m.getDescricao());
         stmt.setString(3, String.valueOf(m.getValor()));
         
-        // O stmt executa o comando SQL no BD, e fecha a conexão
         stmt.execute();
         stmt.close();
         
     }
     
-    // SELECT - Retorna uma lista com o resultado da consulta
+    /* @ requires !id.equals("") && id != null;
+       @ ensures (\forall int i; 0 <= i && i < \return.size();
+       @ 					\return.get(i).getId_multa() != null);  		
+    */
     public List<Multa> getLista(String id) throws SQLException{
         // Prepara conexão p/ receber o comando SQL
         String sql = "SELECT * FROM multa WHERE id_multa like ?";
@@ -61,9 +59,7 @@ public class BdMulta {
         
         List<Multa> lista = new ArrayList<>();
         
-        // Enquanto existir registros, pega os valores do ReultSet e vai adicionando na lista
         while(rs.next()) {
-            //  A cada loop, é instanciado um novo objeto, p/ servir de ponte no envio de registros p/ a lista
             Multa m = new Multa();
             
             // "c" -> Registro novo - .setNome recebe o campo do banco de String "nome" 
@@ -72,7 +68,6 @@ public class BdMulta {
             m.setDescricao(rs.getString("descricao"));
             m.setValor(Float.valueOf(rs.getString("valor")));
             
-            // Adiciona o registro na lista
             lista.add(m);            
         }
         
@@ -80,14 +75,13 @@ public class BdMulta {
         rs.close();
         stmt.close();
         
-        // Retorna a lista de registros, gerados pela consulta
         return lista;          
     }
     
-    /* @ requires id_cliente > 0 
-       @ ensures (\forall int i; 0 <= i && i < lista.size());
-    @ 					lista.get(i).getId() !=  null);  		
-    @*/
+    /* @ requires !id_cliente.equals("") & id_cliente != null;
+       @ ensures (\forall int i; 0 <= i && i < \return.size());
+       @ 					\return.get(i).getId() !=  null);  		
+    */
     public List<Multa> getListaMultaPorCliente(String id_cliente) throws SQLException{  
         // Prepara conexão p/ receber o comando SQL
         String sql = "SELECT multa.id_multa, multa.id_cliente, multa.descricao, multa.valor " +
@@ -126,7 +120,8 @@ public class BdMulta {
         return lista;          
     }
     
-    // SELECT - Retorna o valor total das multas de um cliente
+    /*@	requires !id_cliente.equals("") & id_cliente != null;
+	*/	
     public String totalMultaCliente(String id_cliente) throws SQLException {
         System.out.println("asdj89asduasd8asd8");
         // Prepara conexão p/ receber o comando SQL
@@ -155,7 +150,8 @@ public class BdMulta {
 
     }
     
-    // DELETE - Apaga registros
+    /*@	requires id >= 0;
+	*/		
     public void remove(int id) throws SQLException {       
         // Prepara conexão p/ receber o comando SQL
         String sql = "DELETE FROM multa WHERE id_multa=?";
@@ -170,17 +166,12 @@ public class BdMulta {
         stmt.close();        
     }
     
-
+    /*@	requires id.equals("") & id != null;
+  	*/	
     public void removeMultas(String id) throws SQLException {       
-        // Prepara conexão p/ receber o comando SQL
         String sql = "DELETE FROM multa WHERE id_cliente=?";
-        // stmt recebe o comando SQL
         PreparedStatement stmt = this.conexao.prepareStatement(sql);
-        
-        // Seta o valor do ID p/ a condição de verificação SQL, dentro do stmt
         stmt.setString(1, id);
-        
-        // Executa o codigo SQL, e fecha
         stmt.execute();
         stmt.close();        
     }

@@ -19,23 +19,20 @@ import model.Cliente;
  */
 public class BdCliente {
     
-    /* ----CONEXÃO COM O BD-> */
+  
     private Connection conexao;
     
-    // Estabelece uma conexão
+
     public BdCliente() throws SQLException {       
         this.conexao = CriaConexao.getConexao();
     }
-    /* <-CONEXÃO COM O BD---- */
     
+    // @ invariant conexao instanceof Connection;
+    // @ invariant (\exists conexao);
     
-    
-    
-    /* ----CLIENTE-> */
-    
-    // CREATE - Adiciona um registro
+    /*@	requires c instanceof Cliente;
+	@*/
     public void adicionaCliente(Cliente c) throws SQLException {
-        // Prepara conexão p/ receber o comando SQL
         String sql = "INSERT INTO cliente(nome, data_nasc, sexo, cpf, endereco, fone)"
                 + "VALUES(?, ?, ?, ?, ?, ?)";       
         PreparedStatement stmt;
@@ -49,14 +46,15 @@ public class BdCliente {
         stmt.setString(4, c.getCpf());
         stmt.setString(5, c.getEndereco());
         stmt.setString(6, c.getFone());
-        
-        // O stmt executa o comando SQL no BD, e fecha a conexão
         stmt.execute();
         stmt.close();
         
     }
     
-    // SELECT - Retorna uma lista com o resultado da consulta
+    /* @ ensures (\forall int i; 0 <= i && i < \return.size();
+    @ 					\return.get(i).getId() !=  null);  		
+    @ 	
+    @*/
     public List<Cliente> getLista(String nome) throws SQLException{
         // Prepara conexão p/ receber o comando SQL
         String sql = "SELECT * FROM cliente WHERE nome like ?";
@@ -82,21 +80,18 @@ public class BdCliente {
             c.setEndereco(rs.getString("endereco"));
             c.setFone(rs.getString("fone"));
             
-            // Adiciona o registro na lista
             lista.add(c);            
         }
         
-        
-        
-        // Fecha a conexão com o BD
         rs.close();
         stmt.close();
         
         // Retorna a lista de registros, gerados pela consulta
         return lista;          
     }
-       
-    // UPDATE - Atualiza registros
+    
+    /* @ requires c instanceof Cliente;
+    @*/
     public void altera(Cliente c) throws SQLException {
         // Prepara conexão p/ receber o comando SQL
         String sql = "UPDATE cliente set nome=?, data_nasc=?, sexo=?, cpf=?, endereco=?, fone=?"
@@ -118,20 +113,14 @@ public class BdCliente {
         stmt.close();
     }
     
-    // DELETE - Apaga registros
+    /* @ requires id >= 0 
+    @*/
     public void remove(int id) throws SQLException {       
-        // Prepara conexão p/ receber o comando SQL
         String sql = "DELETE FROM cliente WHERE id_cliente=?";
-        // stmt recebe o comando SQL
         PreparedStatement stmt = this.conexao.prepareStatement(sql);
-        
-        // Seta o valor do ID p/ a condição de verificação SQL, dentro do stmt
         stmt.setInt(1, id);
-        
-        // Executa o codigo SQL, e fecha
         stmt.execute();
         stmt.close();
-        
     }
-    /* <-CLIENTE---- */
+
 }
